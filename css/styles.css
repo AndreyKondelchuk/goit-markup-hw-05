@@ -99,10 +99,35 @@ header {
 .site-nav-list .link:focus {
   color: var(--accent-color);
 }
+.menu-link::after {
+  content: "";
+
+  display: block;
+  width: 100%;
+  height: 4px;
+  margin-top: 33px;
+
+  margin-bottom: -33px;
+  background-color: var(--accent-color);
+  border-radius: 2px;
+}
+.menu-link::after {
+  opacity: 0;
+}
+.menu-link,
+.link-current::after {
+  opacity: 1;
+}
+
+.menu-link:hover::after,
+.menu-link:focus::after {
+  opacity: 1;
+}
 
 .contacts-nav {
   display: flex;
   margin-left: auto;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .contacts-nav li + li {
   margin-left: 50px;
@@ -118,6 +143,7 @@ header {
 .contacts-nav a:focus,
 .contacts-nav a:hover {
   color: var(--accent-color);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .contacts-icon {
   fill: currentColor;
@@ -254,6 +280,7 @@ span {
   width: 1px !important;
   overflow: hidden;
 }
+/* Чем мы занимаемся */
 
 .image {
   display: flex;
@@ -266,7 +293,32 @@ span {
   flex-basis: calc((100% - 60px) / 3);
   margin-right: 30px;
 }
+.thumb {
+  position: relative;
+}
+.thumb-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  width: 100%;
+  height: 70px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(47, 48, 58, 0.8);
+  color: var(--background-color);
+}
+.thumb-text > p {
+  font-size: 14px;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
 /* Наша комманда */
+
 .team {
   display: flex;
   justify-content: space-between;
@@ -336,6 +388,8 @@ span {
   height: 44px;
   border-radius: 50%;
   color: var(--svg);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .networks-icon {
   fill: currentColor;
@@ -366,6 +420,8 @@ span {
   border: 1px solid var(--svg);
   border-radius: 4px;
   color: var(--svg);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .customers-link:hover,
 .customers-link:focus {
@@ -454,6 +510,7 @@ span {
   border-radius: 50%;
   background-color: #44454e;
   color: var(--background-color);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .join .networks-icon {
   fill: currentColor;
@@ -547,4 +604,104 @@ span {
   border-right: 1px solid var(--card-border-line);
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
+}
+.img-thumb {
+  position: relative;
+  overflow: hidden;
+}
+.thumb {
+  position: relative;
+}
+.thumb-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  width: 100%;
+  height: 70px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(47, 48, 58, 0.8);
+  color: var(--background-color);
+}
+.thumb-text > p {
+  font-size: 14px;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(33, 150, 243, 0.9);
+
+  transform: translateY(100%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  color: var(--background-color);
+
+  padding: 63px 24px;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.link-thumb:hover .overlay,
+.link-thumb:focus .overlay {
+  transform: translateY(0);
+}
+/* Модальное окно */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.2);
+
+  opacity: 1;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: inherit;
+}
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  width: 528px;
+  height: 581px;
+
+  background-color: var(--background-color);
+  border-radius: 4px;
+}
+.modal-close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  padding: 5px;
+  background-color: var(--background-color);
+  background-image: url("../images/close-black.svg");
+  background-size: contain;
 }
